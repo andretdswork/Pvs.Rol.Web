@@ -1,14 +1,17 @@
 import { Row, Col, Container, Card, Form, Button } from 'react-bootstrap'
 import styles from './login.module.css'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import LoginContext from '../../store/login-context'
 
 const Login = (props) => {
+    const loginCtx = useContext(LoginContext)
+
     const [password, setPassword] = useState(null)
     const [login, setLogin]= useState(null)
 
     const onLoginHandler = (event) => {
         event.preventDefault()
-        props.onLogin(login, password)
+        loginCtx.Login(login, password)
     }
 
     const loginChangeHandler = (event) => {

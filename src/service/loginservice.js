@@ -6,7 +6,7 @@ class LoginService {
     #url = 'https://localhost:44309/user/login/'
     #login = ''
     #password = ''
-    #loginKey = ''    
+    #loginKey = ''
 
     Login(login, password) {
         this.#login = login
@@ -14,10 +14,11 @@ class LoginService {
 
         let url = `${this.#url}?login=${this.#login}&password=${this.#password}`
         const response = axios.get(url).then((response) => {
-            const data = response.data
-            if (data.logged){
+            const data = response.data            
+            if (data.loginOK){
                 this.SetLoginKey(`${data.login}${Math.random()}`)
                 localStorage.setItem(this.#IS_LOGGEDIN,this.#loginKey)
+                localStorage.setItem('username',data.login)
             }
             return data
         })
@@ -26,6 +27,7 @@ class LoginService {
 
     Logout() {
         localStorage.removeItem(this.#IS_LOGGEDIN)
+        localStorage.removeItem('username')
     }
 
     SetLoginKey(phrase) {
@@ -34,6 +36,10 @@ class LoginService {
 
     GetLoginKey(){
         return localStorage.getItem(this.#IS_LOGGEDIN)
+    }
+
+    GetUserName(){
+        return localStorage.getItem('username')
     }
 }
 
