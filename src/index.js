@@ -6,7 +6,7 @@ import App from './App';
 import LoginProvider from './store/login-provider';
 
 ReactDOM.render(
-  <React.StrictMode>
+  <React.StrictMode>    
     <LoginProvider>
       <App />
     </LoginProvider>

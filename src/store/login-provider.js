@@ -14,7 +14,7 @@ const LoginProvider = props => {
             setIsLoggedIn(true)
             setLoggedUser(loginService.GetUserName())
         }
-    }, [isLoggedIn])
+    }, [])
 
     const loginHandler = (username, password) => {        
         loginService.Login(username, password).then((response) => {

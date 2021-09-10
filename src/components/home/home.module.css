@@ -1,3 +1,17 @@
 .mainNavColor {
     background-color: #b9b9b952;
 }
+
+.subMenu {
+    float:right;
+    padding-top: 2%;
+}
+
+.divider {
+    color: #efebeb14 !important;
+}
+
+dropdownMenu {
+    color: #efebebbd !important;
+    border-radius: 0.25rem !important;
+}
