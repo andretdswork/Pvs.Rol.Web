@@ -1,7 +1,7 @@
 import { useContext } from 'react'
-import Home from './components/home/home';
+import Home from './pages/home/home';
 import Login from './components/login/login'
-import MainNavBar from './components/home/main-nav-bar'
+import MainNavBar from './pages/home/main-nav-bar'
 import { ToastContainer } from 'react-toastify'
 import LoginContext from './store/login-context'
 import 'react-toastify/dist/ReactToastify.css'

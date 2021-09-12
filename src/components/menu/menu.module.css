@@ -5,6 +5,8 @@
 .subMenu {
     float:right;
     padding-top: 2%;
+    color: black !important;
+    text-decoration: none !important;
 }
 
 .divider {
