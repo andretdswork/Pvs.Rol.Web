@@ -21,8 +21,7 @@ const LoginProvider = props => {
             if (response.loginOK)
             {                
               setLoggedUser(response.login)
-              setIsLoggedIn(true)
-              console.log('logou')
+              setIsLoggedIn(true)              
             }
             else {          
               toast.error("Usuario ou senha inválidos!", {
