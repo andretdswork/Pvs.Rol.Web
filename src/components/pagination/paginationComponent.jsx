@@ -1,41 +1,47 @@
-import { useCallback, useEffect, useState } from "react"
-import { Pagination } from "react-bootstrap"
+import { useEffect, useState } from "react"
+import { Button, ButtonGroup, Row, Col } from "react-bootstrap"
 
 const PaginationComponent = (props) => {
-    const [items, setItems] = useState([]);
-    const [activePage, setActivepage] = useState(1);
-    const [numberOfPages, setNumberOfPages] = useState()
-    const [totalItems] = useState(props.length)
+    const lista = props.items
+    const [itensPorPagina, setItensPorPagina] = useState()    
+    const [paginaAtual, setPaginaAtual] = useState(1)
+    /*
+        itens por ppagina
+        numero de paginas = Math.ceil(totalItems / 10)
+        total de registros
+    */    
 
-    const generatePaginationItens = useCallback(() => {
-        console.log(totalItems)
-        setNumberOfPages(Math.ceil(totalItems / 10))
-        setActivepage(1)
-        let paginationItems = []
-        for (let number = 1; number <= numberOfPages; number++) {
-            paginationItems.push(number)
-        }
-        setItems(paginationItems)
-    }, [numberOfPages, totalItems])
+        useEffect(() => {
+            setItensPorPagina(10)            
+        },[lista])
 
-    const activePageHandle = (event) => {
-        setActivepage(event.target.value)
+    const onPrevHandler = () => {        
+        setPaginaAtual(paginaAtual - 1)
+        props.handlerPage(lista.slice((itensPorPagina - 10) *  paginaAtual ,(itensPorPagina * paginaAtual) - 10))
     }
 
-    useEffect(() => {        
-        generatePaginationItens()        
-    }, [generatePaginationItens])
+    const onNextHandler = () => {
+        setPaginaAtual(paginaAtual + 1)
+        //console.log(itensPorPagina * paginaAtual , (itensPorPagina * paginaAtual) + 10)
+        console.log(lista.slice(itensPorPagina * paginaAtual ,(itensPorPagina * paginaAtual) + 10))
+        props.handlerPage(lista.slice(itensPorPagina * paginaAtual ,(itensPorPagina * paginaAtual) + 10))        
+    }
 
     return (
         <>
-            <Pagination>{
-                items.map((item) => {                    
-                    return <Pagination.Item key={item} active={item == activePage} onClick={activePageHandle}>
-                        {item}
-                    </Pagination.Item>
-
-            })
-                }</Pagination>
+            <Row>
+                <span>{paginaAtual} de {props.numeroPaginas}</span>
+            </Row>
+            <Row className="justify-content-md-center">
+                <Col md={3} >
+                    <ButtonGroup aria-label="Basic example">
+                        <Button variant="outline-info" disabled={paginaAtual === 1} onClick={onPrevHandler} >Anterior</Button>
+                        {
+                             <Button variant="outline-info" disabled={paginaAtual === props.numeroPaginas}  onClick={onNextHandler}>Próximo</Button>
+                        }                        
+                    </ButtonGroup>
+                </Col>
+            </Row>
         </>
     )
 }

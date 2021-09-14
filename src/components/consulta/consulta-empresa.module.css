@@ -1,3 +1,8 @@
 .modalSize {
     max-width: 1200px;
 }
+
+.empresaSelecionada {
+    font-size: 15px;
+    color:red;
+}

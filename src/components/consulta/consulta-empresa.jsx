@@ -6,12 +6,12 @@ import EmpresaService from '../../service/empresaservice'
 import styles from './consulta-empresa.module.css'
 import { toast } from 'react-toastify'
 import ConsultaEmpresaDetalhe from './consulta-empresa-detalhe'
-import PaginationComponent from '../pagination/paginationComponent'
 
 const ConsultaEmpresa = () => {
     const [show, setShow] = useState(true)
     const [filter, setFilter] = useState()
     const [listaEmpresa, setListaEmpresa] = useState()
+    const [empresaSelecionada, setEmpresaSelecionada] = useState('')
 
     const handleShow = _ => setShow(true)
     const handleClose = _ => setShow(false)
@@ -39,15 +39,22 @@ const ConsultaEmpresa = () => {
 
     const modalOverlayElement = document.getElementById('overlay-root')
 
+    const setEmpresaSelecionadaHandler = (empresa) => {        
+        setEmpresaSelecionada(empresa.razaoSocial)
+    }
+
     return (
         <>
             {
                 ReactDOM.createPortal(
                     <Modal show={show} onHide={handleClose} size="lg" backdrop='static' dialogClassName={styles.modalSize}>
                         <ModalHeader closeButton>
-                            <Modal.Title id="example-modal-sizes-title-sm">
-                                Selecionar Empresa
-                            </Modal.Title>
+                            <h4>
+                                Empresa selecionada
+                                <div>
+                                    <span className={styles.empresaSelecionada}>{empresaSelecionada}</span>                    
+                                </div>
+                            </h4>                            
                         </ModalHeader>
                         <ModalBody>
                             <Row>
@@ -65,8 +72,7 @@ const ConsultaEmpresa = () => {
                             </Row>
                             <Row>
                                 {listaEmpresa && <>
-                                    <ConsultaEmpresaDetalhe listaEmpresa={listaEmpresa} onSelectCompany={selectCompanyHandler}/>
-                                    <PaginationComponent length={listaEmpresa.length} items={listaEmpresa}></PaginationComponent>
+                                    <ConsultaEmpresaDetalhe listaEmpresa={listaEmpresa} onSelectCompany={selectCompanyHandler} onEmpresaSelecionada={setEmpresaSelecionadaHandler}/>                                    
                                 </>
                                 
                                 }

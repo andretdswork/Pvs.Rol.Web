@@ -1,35 +1,57 @@
-import { Table } from "react-bootstrap"
+import { useEffect, useState } from 'react'
+import { propTypes } from 'react-bootstrap/esm/Image'
+import DataTable from 'react-data-table-component'
+
+const columns = [
+    {
+        name: 'Apelido',
+        selector: row => row.apelido,
+        sortable: true,
+    },
+    {
+        name: 'CNPJ',
+        selector: row => row.cnpj,
+        sortable: true,
+    },
+    {
+        name: 'Nome Fantasia',
+        selector: row => row.nomeFantasia,
+        sortable: true,
+    },
+    {
+        name: 'Razão Social',
+        selector: row => row.razaoSocial,
+        sortable: true,
+    }
+]
+
 
 const ConsultaEmpresaDetalhe = (props) => {
-    const onSelectCompany = (event) => {
-        console.log(event.target)
+    const [data, setData] = useState(props.listaEmpresa)
+
+    
+    const paginationComponentOptions = {
+        rowsPerPageText: 'Itens por página',
+        rangeSeparatorText: 'de',
+        selectAllRowsItem: true,
+        selectAllRowsItemText: 'Todos',
+    };
+    
+    const onRowClickedHandle = (empresa) => {
+        props.onEmpresaSelecionada(empresa)
     }
 
     return (
-        <>
-            <Table striped bordered hover size="sm">
-                <thead>
-                    <tr>
-                        <th>Apelido</th>
-                        <th>CNPJ</th>
-                        <th>Razão Social</th>
-                        <th>Nome Fantasia</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        props.listaEmpresa.map((item) => {
-                            return <tr onClick={onSelectCompany} key={item.cnpj}>
-                                <td>{item.apelido}</td>
-                                <td>{item.cnpj}</td>
-                                <td>{item.razaoSocial}</td>
-                                <td>{item.nomeFantasia}</td>
-                            </tr>
-                        })
-                    }
-                </tbody>
-            </Table>
-        </>
+        
+        <DataTable 
+            columns={columns}
+            data={data}
+            pagination
+		    paginationComponentOptions={paginationComponentOptions}
+            onRowClicked={onRowClickedHandle}
+            striped={true}
+            highlightOnHover={true}
+            />        
     )
 }
 
