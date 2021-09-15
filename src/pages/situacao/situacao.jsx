@@ -21,13 +21,15 @@ const Situacao = () => {
                 <Row className="justify-content-md-center">
                     <Col md={6} >
                         <Card>
-                            <Card.Body>
+                            <Card.Header style={{  'backgroundColor': 'white', 'border':'none'}}>
                                 <Card.Title>Situação</Card.Title>
+                            </Card.Header>
+                            <Card.Body>                                
                                 <Form onSubmit={submitHandler}>
                                     <Row className="g-1" style={{ 'marginBottom': '1%'}}>
                                         <Col style={{ 'textAlign': 'left'}}>
-                                            <Button onClick={modalConsultaHandler}>Escolher Empresa</Button>
-                                        </Col>                                        
+                                            <Button onClick={modalConsultaHandler} size='sm' variant='info'>Escolher Empresa</Button>
+                                        </Col>
                                     </Row>
                                     <Row className="g-2">                                         
                                         <Form.Group as={Col}>
