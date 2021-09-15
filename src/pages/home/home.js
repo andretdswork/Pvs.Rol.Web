@@ -4,7 +4,7 @@ import {
     Route    
 } from "react-router-dom";
 
-import Situacao from '../situacao/situacao'
+import Situacao from '../situacao/situacao.jsx'
 import Prolabore from '../prolabore/prolabore';
 import Tributacao from '../tributacao/tributacao';
 import Empresa from '../empresa/empresa';

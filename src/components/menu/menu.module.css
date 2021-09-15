@@ -17,3 +17,7 @@ dropdownMenu {
     color: #efebebbd !important;
     border-radius: 0.25rem !important;
 }
+
+.marginBottom10 {
+    margin-bottom: 2%;
+}

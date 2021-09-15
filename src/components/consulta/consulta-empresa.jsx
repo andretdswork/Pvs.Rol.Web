@@ -7,14 +7,14 @@ import styles from './consulta-empresa.module.css'
 import { toast } from 'react-toastify'
 import ConsultaEmpresaDetalhe from './consulta-empresa-detalhe'
 
-const ConsultaEmpresa = () => {
-    const [show, setShow] = useState(true)
+const ConsultaEmpresa = (props) => {
+    console.log('consu')
+    const [show, setShow] = useState(props.show)
     const [filter, setFilter] = useState()
     const [listaEmpresa, setListaEmpresa] = useState()
     const [empresaSelecionada, setEmpresaSelecionada] = useState('')
-
-    const handleShow = _ => setShow(true)
-    const handleClose = _ => setShow(false)
+    
+    const handleClose = _ => props.onClose()
 
     const handlerConsultar = async (event) => {
         event.preventDefault()
