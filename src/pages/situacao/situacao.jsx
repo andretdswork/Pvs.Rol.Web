@@ -1,16 +1,17 @@
-import { useRef, useState, useEffect } from 'react'
-import ConsultaEmpresa from "../../components/consulta/consulta-empresa"
+import { useRef, useState, useEffect, memo, useCallback } from 'react'
 import { toast } from 'react-toastify'
 import { Row, Form, FloatingLabel, Col, Button } from 'react-bootstrap'
 import PvsCard from '../../UI/card/pvs-card'
 import SituacaoService from '../../service/situacaoservice'
 import PvsSelect from '../../UI/select/pvs-select'
+import SelecionaEmpresa from '../../components/consulta/seleciona-empresa'
 
 const Situacao = () => {
-    const [showConsultaEmpresa, setShowConsultaEmpresa] = useState(false)
+    const selectInputRef = useRef()
+    const selecionaEmpresaRef = useRef()
     const [selectedCompany, setSelectedCompany] = useState('')
     const [dataSituacao, setDataSituacao] = useState('')
-    const [status, setStatus] = useState(1)
+    const [status, setStatus] = useState(0)
     const [lisStatus, setListStatus] = useState([])
 
     useEffect(() => {
@@ -32,9 +33,10 @@ const Situacao = () => {
             })
             if (response) {
                 toast.success('Situacao salvo com sucesso!!')
-                setSelectedCompany('')
+                setSelectedCompany('')                
                 setDataSituacao('')
-                selectInputRef.current.defaultValue(1)
+                selecionaEmpresaRef.current.clear()
+                selectInputRef.current.defaultValue(0)
             }
             else {
                 toast.error('Erro ao salvar Situacao')
@@ -44,44 +46,23 @@ const Situacao = () => {
             toast.warning('Os campos Data Situação, Status e Empresa')
     }
 
-    const modalConsultaHandler = _ => {
-        setShowConsultaEmpresa(!showConsultaEmpresa)
-    }
-
-    const selectCompanyHandler = (empresa) => {
-        setSelectedCompany(empresa)
-    }
-
-    const setDataSituacaoHanlder = (event) => {
+    const setDataSituacaoHanlder = (event) => {        
         setDataSituacao(event.target.value)
     }
 
-    const setStatusHandler = (value) => {
+    const setStatusHandler = (value) => {        
         setStatus(value)
     }
 
-    const selectInputRef = useRef()
+    const onSelectedCompanyHandler = (empresa) => {
+        setSelectedCompany(empresa)
+    }
 
     return (
         <>
-            {
-                showConsultaEmpresa && <ConsultaEmpresa key={1} show={showConsultaEmpresa} onClose={modalConsultaHandler} onSelectedCompany={selectCompanyHandler}></ConsultaEmpresa>
-            }
-
             <PvsCard>
-                <Form onSubmit={CriarSituacao}>
-                    <Row className="g-3">
-                        <Col style={{ 'textAlign': 'left' }}>
-                            <Button onClick={modalConsultaHandler} size='sm' variant='light'>Escolher Empresa</Button>
-                        </Col>
-                        <div >
-                            {
-                                selectedCompany && <span style={{ 'float': 'left' }}>
-                                    Empresa selecionada: <strong>{selectedCompany.razaoSocial} {selectedCompany.cnpj} </strong>
-                                </span>
-                            }
-                        </div>
-                    </Row>
+                <SelecionaEmpresa onSelectedCompany={onSelectedCompanyHandler} ref={selecionaEmpresaRef}/>
+                <Form onSubmit={CriarSituacao}>                   
                     <Row className="g-2" md={2} xs={12}>
                         <Col>
                             <FloatingLabel controlId="floatingInputGrid" label="Data Situação">
@@ -103,4 +84,4 @@ const Situacao = () => {
     )
 }
 
-export default Situacao
+export default memo(Situacao)

@@ -5,23 +5,23 @@ class SituacaoService {
     #url = 'Situacao'
     #listStatus = [
         {
-            value : 1,
+            value : 0,
             label: 'Ativa'
         },
         {
-            value : 2,
+            value : 1,
             label: 'Inativa'
         },
         {
-            value : 3,
+            value : 2,
             label: 'Encerrada'
         },
         {
-            value : 4,
+            value : 3,
             label: 'Distrato'
         },
         {
-            value : 5,
+            value : 4,
             label: 'Lista Negra'
         }
     ]
