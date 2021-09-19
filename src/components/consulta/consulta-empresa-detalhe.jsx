@@ -1,8 +1,13 @@
-import { useEffect, useState } from 'react'
-import { propTypes } from 'react-bootstrap/esm/Image'
+import { memo } from 'react'
+
 import DataTable from 'react-data-table-component'
 
 const columns = [
+    {
+        name: '',
+        selector: row => row.idempresa,
+        omit : true
+    },
     {
         name: 'Apelido',
         selector: row => row.apelido,
@@ -27,32 +32,30 @@ const columns = [
 
 
 const ConsultaEmpresaDetalhe = (props) => {
-    const [data, setData] = useState(props.listaEmpresa)
-
-    
     const paginationComponentOptions = {
         rowsPerPageText: 'Itens por página',
         rangeSeparatorText: 'de',
         selectAllRowsItem: true,
         selectAllRowsItemText: 'Todos',
     };
-    
+
     const onRowClickedHandle = (empresa) => {
         props.onEmpresaSelecionada(empresa)
     }
 
     return (
-        
-        <DataTable 
+        <DataTable
             columns={columns}
-            data={data}
+            data={props.listaEmpresa}
             pagination
-		    paginationComponentOptions={paginationComponentOptions}
+            paginationComponentOptions={paginationComponentOptions}
             onRowClicked={onRowClickedHandle}
             striped={true}
             highlightOnHover={true}
-            />        
+        />
+
+
     )
 }
 
-export default ConsultaEmpresaDetalhe
+export default memo(ConsultaEmpresaDetalhe)

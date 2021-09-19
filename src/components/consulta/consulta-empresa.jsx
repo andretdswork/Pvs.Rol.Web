@@ -8,25 +8,27 @@ import { toast } from 'react-toastify'
 import ConsultaEmpresaDetalhe from './consulta-empresa-detalhe'
 
 const ConsultaEmpresa = (props) => {
-    console.log('consu')
     const [show, setShow] = useState(props.show)
     const [filter, setFilter] = useState()
     const [listaEmpresa, setListaEmpresa] = useState()
     const [empresaSelecionada, setEmpresaSelecionada] = useState('')
     
-    const handleClose = _ => props.onClose()
+    const handleClose = _ => {
+        props.onSelectedCompany(empresaSelecionada)
+        props.onClose()
+    } 
 
     const handlerConsultar = async (event) => {
         event.preventDefault()
         let service = new EmpresaService()
-        if (filter) {
+        if (filter) {            
             const response = await service.SearchByfilter(filter).then((data) => {
                 return data
-            })
-            setListaEmpresa(response)
+            })            
+            setListaEmpresa(response)            
         }
         else
-            toast.warning('Preencher consulta')
+            toast.warning('Preencher consulta')        
     }
 
     const selectCompanyHandler = (event) => {
@@ -39,8 +41,8 @@ const ConsultaEmpresa = (props) => {
 
     const modalOverlayElement = document.getElementById('overlay-root')
 
-    const setEmpresaSelecionadaHandler = (empresa) => {        
-        setEmpresaSelecionada(empresa.razaoSocial)
+    const setEmpresaSelecionadaHandler = (empresa) => {
+        setEmpresaSelecionada(empresa)        
     }
 
     return (
@@ -52,7 +54,7 @@ const ConsultaEmpresa = (props) => {
                             <h4>
                                 Empresa selecionada
                                 <div>
-                                    <span className={styles.empresaSelecionada}>{empresaSelecionada}</span>                    
+                                    <span className={styles.empresaSelecionada}>{empresaSelecionada.razaoSocial}</span>                                    
                                 </div>
                             </h4>                            
                         </ModalHeader>
@@ -76,7 +78,6 @@ const ConsultaEmpresa = (props) => {
                                 </>
                                 
                                 }
-
                             </Row>
                         </ModalBody>
                         <Modal.Footer>

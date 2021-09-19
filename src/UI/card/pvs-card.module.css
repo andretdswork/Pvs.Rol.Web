@@ -1,6 +1,6 @@
-.formSituacao {
+.pvsForm {
     border-style: solid;
-    border-radius: 15px;
+    border-radius: 5px;
     border-color: rgba(0, 0, 0, 0.075);
     border-width: thin;
     padding: 2em;

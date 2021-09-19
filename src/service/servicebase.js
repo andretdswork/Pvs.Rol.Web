@@ -18,7 +18,16 @@ class ServiceBase {
             console.log(error);
           });
           return response
-    }   
+    }
+
+    async Post(url, params) {
+        const response = await this.#instance.post(`${url}`, params).then((response) => {
+            return response.data
+        }).catch(function (error) {
+            console.log(error);
+          });
+        return response
+    }
 }
 
 export default ServiceBase
