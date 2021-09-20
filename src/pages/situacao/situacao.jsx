@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, memo, useCallback } from 'react'
+import { useRef, useState, useEffect, memo } from 'react'
 import { toast } from 'react-toastify'
 import { Row, Form, FloatingLabel, Col, Button } from 'react-bootstrap'
 import PvsCard from '../../UI/card/pvs-card'
@@ -14,10 +14,13 @@ const Situacao = () => {
     const [status, setStatus] = useState(0)
     const [lisStatus, setListStatus] = useState([])
 
-    useEffect( async () => {
-        let service = new SituacaoService()
-        let listSituation = await service.getListStatus().then( (data) => {return data})
-        setListStatus(listSituation)
+    useEffect( () => {
+        let service = new SituacaoService()        
+        const fetch =  async function FetchData() {
+            const response = await service.getListStatus().then( (data) => {return data})
+            setListStatus(response)            
+        }
+        fetch()
     }, [])
 
     const CriarSituacao = async (event) => {
