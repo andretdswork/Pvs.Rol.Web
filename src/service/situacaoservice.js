@@ -2,29 +2,7 @@ import ServiceBase from "./servicebase";
 
 class SituacaoService {
     #service = null
-    #url = 'Situacao'
-    #listStatus = [
-        {
-            value : 0,
-            label: 'Ativa'
-        },
-        {
-            value : 1,
-            label: 'Inativa'
-        },
-        {
-            value : 2,
-            label: 'Encerrada'
-        },
-        {
-            value : 3,
-            label: 'Distrato'
-        },
-        {
-            value : 4,
-            label: 'Lista Negra'
-        }
-    ]
+    #url = 'Situacao'    
 
     constructor(){
         this.#service = new ServiceBase()
@@ -37,8 +15,11 @@ class SituacaoService {
         return response
     }
 
-    getListStatus() {
-        return this.#listStatus
+    async getListStatus() {
+        const response = await this.#service.Get(`${this.#url}/AllDescriptionsituation`).then((response) => {
+            return response
+        })        
+        return response
     } 
 }
 

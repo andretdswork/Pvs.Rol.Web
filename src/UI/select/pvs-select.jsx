@@ -3,15 +3,15 @@ import { Form, FloatingLabel } from 'react-bootstrap'
 
 const PvsSelect = React.forwardRef((props, ref) => {
     const selectRef = useRef()
-    const [value, setValue] = useState(props.defaultValue)    
+    const [key, setKey] = useState(props.defaultValue)    
 
     const setStatusHandler = (event) => {
-        setValue(event.target.value)
+        setKey(event.target.value)
         props.onChangeHandler(event.target.value)
     }
 
     const setDefaultValue = ((value) => {
-        setValue(value)
+        setKey(value)
     })
 
     useImperativeHandle(ref , () => {
@@ -23,10 +23,10 @@ const PvsSelect = React.forwardRef((props, ref) => {
     return (
         <>
             <FloatingLabel controlId="floatingSelect" label="Escolha a Situação">
-                <Form.Select aria-label="" onChange={setStatusHandler} value={value} ref={selectRef}>
+                <Form.Select aria-label="" onChange={setStatusHandler} value={key} ref={selectRef}>
                     {
                         props.options.map((item) => {
-                            return <option value={item.value} key={item.value}>{item.label}</option>
+                            return <option value={item.key} key={item.key}>{item.label}</option>
                         })
                     }
                 </Form.Select>

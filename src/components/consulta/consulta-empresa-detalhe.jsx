@@ -27,6 +27,11 @@ const columns = [
         name: 'Razão Social',
         selector: row => row.razaoSocial,
         sortable: true,
+    },
+    {
+        name: 'Último Status',
+        selector: row => row.ultimoStatus,
+        sortable: true,
     }
 ]
 

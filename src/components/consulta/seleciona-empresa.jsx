@@ -36,7 +36,7 @@ const SelecionaEmpresa = React.forwardRef((props, ref) => {
             <div >
                 {
                     selectedCompany && <span style={{ 'float': 'left' }}>
-                        Empresa selecionada: <strong>{selectedCompany.razaoSocial} {selectedCompany.cnpj} </strong>
+                        Empresa selecionada: <strong>{selectedCompany.nomeFantasia} - {selectedCompany.razaoSocial} {selectedCompany.apelido} </strong>
                     </span>
                 }
             </div>

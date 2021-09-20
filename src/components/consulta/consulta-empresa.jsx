@@ -29,11 +29,7 @@ const ConsultaEmpresa = (props) => {
         }
         else
             toast.warning('Preencher consulta')        
-    }
-
-    const selectCompanyHandler = (event) => {
-        console.log(event.target)
-    }
+    }    
 
     const onFilterChangeHandler = (event) => {
         setFilter(event.target.value)
@@ -42,7 +38,7 @@ const ConsultaEmpresa = (props) => {
     const modalOverlayElement = document.getElementById('overlay-root')
 
     const setEmpresaSelecionadaHandler = (empresa) => {
-        setEmpresaSelecionada(empresa)        
+        setEmpresaSelecionada(empresa)
     }
 
     return (
@@ -56,7 +52,7 @@ const ConsultaEmpresa = (props) => {
                                 <div>
                                     <span className={styles.empresaSelecionada}>{empresaSelecionada.razaoSocial}</span>                                    
                                 </div>
-                            </h4>                            
+                            </h4>
                         </ModalHeader>
                         <ModalBody>
                             <Row>
@@ -74,7 +70,7 @@ const ConsultaEmpresa = (props) => {
                             </Row>
                             <Row>
                                 {listaEmpresa && <>
-                                    <ConsultaEmpresaDetalhe listaEmpresa={listaEmpresa} onSelectCompany={selectCompanyHandler} onEmpresaSelecionada={setEmpresaSelecionadaHandler}/>                                    
+                                    <ConsultaEmpresaDetalhe listaEmpresa={listaEmpresa} onEmpresaSelecionada={setEmpresaSelecionadaHandler}/>                                    
                                 </>
                                 
                                 }

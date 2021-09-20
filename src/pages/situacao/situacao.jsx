@@ -14,9 +14,10 @@ const Situacao = () => {
     const [status, setStatus] = useState(0)
     const [lisStatus, setListStatus] = useState([])
 
-    useEffect(() => {
+    useEffect( async () => {
         let service = new SituacaoService()
-        setListStatus(service.getListStatus())
+        let listSituation = await service.getListStatus().then( (data) => {return data})
+        setListStatus(listSituation)
     }, [])
 
     const CriarSituacao = async (event) => {
