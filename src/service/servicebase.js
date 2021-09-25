@@ -11,22 +11,19 @@ class ServiceBase {
           });
     }
 
-    async Get(url, params) {
-        const response = await this.#instance.get(`${url}`, params).then((response) => {
-            return response.data
-        }).catch(function (error) {
-            console.log(error);
-          });
-          return response
+    async Get(url, params) {    
+        const response = await this.#instance.get(`${url}`, params)
+        return response.data
     }
 
     async Post(url, params) {
-        const response = await this.#instance.post(`${url}`, params).then((response) => {
-            return response.data
-        }).catch(function (error) {
-            console.log(error);
-          });
-        return response
+        // const response = await this.#instance.post(`${url}`, params).then((response) => {
+        //     return response.data
+        // }).catch(function (error) {
+        //     console.log(error);
+        //   });
+        const response = await this.#instance.post(`${url}`, params)
+        return response.data
     }
 }
 

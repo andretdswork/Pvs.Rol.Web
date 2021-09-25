@@ -64,13 +64,13 @@ const Situacao = () => {
 
     return (
         <>
-            <PvsCard>
+            <PvsCard title='Situação'>
                 <SelecionaEmpresa onSelectedCompany={onSelectedCompanyHandler} ref={selecionaEmpresaRef}/>
                 <Form onSubmit={CriarSituacao}>                   
                     <Row className="g-2" md={2} xs={12}>
                         <Col>
                             <FloatingLabel controlId="floatingInputGrid" label="Data Situação">
-                                <Form.Control type="date" placeholder="name@example.com" onChange={setDataSituacaoHanlder} value={dataSituacao} />
+                                <Form.Control type="date" placeholder="" onChange={setDataSituacaoHanlder} value={dataSituacao} />
                             </FloatingLabel>
                         </Col>
                         <Col>
