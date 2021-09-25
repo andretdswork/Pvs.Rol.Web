@@ -57,14 +57,18 @@ const Prolabore = () => {
             console.log('params')
             const response = await service.Create(params)
             toast.success(response.message)
-            setSelectedCompany('')                
-            setAnoReferencia('')
-            setMesReferencia('')
-            setValorProlabore('')
-            setCpfSocio('')
-            selecionaEmpresaRef.current.clear()            
+            ClearForm()
         }    
         setIsValidForm(validform);
+    }
+
+    const ClearForm = () => {
+        setSelectedCompany('')                
+        setAnoReferencia('')
+        setMesReferencia('')
+        setValorProlabore('')
+        setCpfSocio('')
+        selecionaEmpresaRef.current.clear()
     }
 
     const validateForm = () => {

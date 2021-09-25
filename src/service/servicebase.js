@@ -3,26 +3,23 @@ import axios from "axios"
 class ServiceBase {    
     #baseUrl = 'https://localhost:44309/'
     #instance = null
+    #url = ''
 
-    constructor(){
+    constructor(url){
         this.#instance = axios.create({
             baseURL: this.#baseUrl,
-            timeout: 5000            
+            timeout: 5000
           });
+          this.#url = url
     }
 
-    async Get(url, params) {    
-        const response = await this.#instance.get(`${url}`, params)
+    async Get(action, params) {    
+        const response = await this.#instance.get(`${this.#url}/${action}`, params)
         return response.data
     }
 
-    async Post(url, params) {
-        // const response = await this.#instance.post(`${url}`, params).then((response) => {
-        //     return response.data
-        // }).catch(function (error) {
-        //     console.log(error);
-        //   });
-        const response = await this.#instance.post(`${url}`, params)
+    async Post(action, params) {
+        const response = await this.#instance.post(`${this.#url}/${action}`, params)
         return response.data
     }
 }

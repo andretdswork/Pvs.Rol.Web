@@ -1,10 +1,10 @@
 import ServiceBase from "./servicebase";
 
-class ProlaboreService extends ServiceBase{
+class TributacaoService extends ServiceBase{    
 
     constructor(){
-        super('Prolabore')
-    }
+        super('Tributacao')
+    }    
 
     async Create(params) {
         const response = await super.Post(`Create`,params)
@@ -12,4 +12,4 @@ class ProlaboreService extends ServiceBase{
     }
 }
 
-export default ProlaboreService
+export default TributacaoService

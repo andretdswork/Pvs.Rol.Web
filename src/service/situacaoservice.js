@@ -1,22 +1,20 @@
 import ServiceBase from "./servicebase";
 
-class SituacaoService {
-    #service = null
-    #url = 'Situacao'    
+class SituacaoService extends ServiceBase {   
 
     constructor(){
-        this.#service = new ServiceBase()
+        super('Situacao')        
     }
 
     async Create(params) {        
-        const response = await this.#service.Post(`${this.#url}/Create?idEmpresa=${params.idempresa}&status=${params.status}&datasituacao=${params.dataSituacao}`).then((response) => {
+        const response = await super.Post(`Create?idEmpresa=${params.idempresa}&status=${params.status}&datasituacao=${params.dataSituacao}`).then((response) => {
             return response
         })        
         return response
     }
 
     async getListStatus() {
-        const response = await this.#service.Get(`${this.#url}/AllDescriptionsituation`).then((response) => {
+        const response = await super.Get(`AllDescriptionsituation`).then((response) => {
             return response
         })        
         return response
