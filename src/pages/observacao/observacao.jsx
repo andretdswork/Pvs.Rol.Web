@@ -26,7 +26,7 @@ const Observacao = (props) => {
             const service = new ObservacaoService()
             let params = {
                 companyId: selectedCompany.idEmpresa,
-                text: observacao
+                description: observacao
             }
             const response = await service.Create(params)
             toast.success(response.message)
@@ -62,7 +62,7 @@ const Observacao = (props) => {
     return (
         <PvsCard title='Observação'>
             <SelecionaEmpresa onSelectedCompany={onSelectedCompanyHandler} ref={selecionaEmpresaRef} />
-            <Form submit={Create}>
+            <Form onSubmit={Create}>
                 <Row className="g-2" md={1} xs={12}>
                     <Col>
                         <PvsInput type="text" placeHolder="Observação" onChange={setObservacaoHandler} value={observacao} required={true} label="Observação" maxLength={500} isTextArea={true} />

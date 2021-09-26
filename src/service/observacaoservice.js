@@ -7,7 +7,7 @@ class ObservacaoService extends ServiceBase{
     }
 
     async Create(params) {
-        console.log('create observacao')
+        return super.Post('Create',params)
     }
 }
 

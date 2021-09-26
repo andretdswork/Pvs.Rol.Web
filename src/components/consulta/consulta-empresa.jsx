@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Modal, ModalBody, Row, InputGroup, Button, FormControl, Form } from 'react-bootstrap'
 import ReactDOM from 'react-dom'
 import ModalHeader from 'react-bootstrap/esm/ModalHeader'
@@ -7,12 +7,12 @@ import styles from './consulta-empresa.module.css'
 import { toast } from 'react-toastify'
 import ConsultaEmpresaDetalhe from './consulta-empresa-detalhe'
 
-const ConsultaEmpresa = (props) => {
+const ConsultaEmpresa = (props) => {    
     const [show] = useState(props.show)
     const [filter, setFilter] = useState()
     const [listaEmpresa, setListaEmpresa] = useState()
-    const [empresaSelecionada, setEmpresaSelecionada] = useState('')
-    
+    const [empresaSelecionada, setEmpresaSelecionada] = useState('')    
+
     const handleClose = _ => {
         props.onSelectedCompany(empresaSelecionada)
         props.onClose()
@@ -57,7 +57,7 @@ const ConsultaEmpresa = (props) => {
                         <ModalBody>
                             <Row>
                                 <Form onSubmit={handlerConsultar}>
-                                    <InputGroup className="mb-3" onChange={onFilterChangeHandler}>
+                                    <InputGroup className="mb-3" onChange={onFilterChangeHandler} >
                                         <FormControl
                                             aria-label="Recipient's username"
                                             aria-describedby="basic-addon2"
