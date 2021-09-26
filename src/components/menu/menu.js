@@ -1,9 +1,10 @@
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
-import BusinessIcon from '@material-ui/icons/Business'
-import PeopleIcon from '@material-ui/icons/People'
+import Business from '@material-ui/icons/Business';
+import People from '@material-ui/icons/People';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import DonutSmallIcon from '@material-ui/icons/DonutSmall';
 import PriorityHighIcon from '@material-ui/icons/PriorityHigh';
+import Assignment from '@material-ui/icons/Assignment';
 import styles from './menu.module.css'
 import {
     Link
@@ -18,14 +19,14 @@ const Menu = () => {
                     <Nav className="me-auto">
                         <NavDropdown title="Consulta" id="basic-nav-dropdown" className={styles.dropdownMenu}>
                             <NavDropdown.Item href="#action/3.1">
-                                <BusinessIcon fontSize='large'></BusinessIcon><span className={styles.subMenu}>Empresas</span>
+                                <Business fontSize='large'></Business><span className={styles.subMenu}>Empresas</span>
                             </NavDropdown.Item>
                             <NavDropdown.Divider className={styles.divider} />
-                            <NavDropdown.Item href="#action/3.2"><PeopleIcon fontSize='large'></PeopleIcon><span className={styles.subMenu}>Pessoas</span></NavDropdown.Item>
+                            <NavDropdown.Item href="#action/3.2"><People fontSize='large'></People><span className={styles.subMenu}>Pessoas</span></NavDropdown.Item>
                         </NavDropdown>
                         <NavDropdown title="Manutenção" id="basic-nav-dropdown" className={styles.dropdownMenu}>
                             <NavDropdown.Item>
-                                <BusinessIcon fontSize='large'></BusinessIcon>
+                                <Business fontSize='large'></Business>
                                 <Link to='/Empresa' className={styles.subMenu}>
                                     Empresas
                                 </Link>
@@ -49,6 +50,13 @@ const Menu = () => {
                                 <PriorityHighIcon fontSize='large'></PriorityHighIcon>
                                 <Link to='/Situacao' className={styles.subMenu}>
                                     Situação
+                                </Link>
+                            </NavDropdown.Item>
+                            <NavDropdown.Divider className={styles.divider} />
+                            <NavDropdown.Item>
+                                <Assignment fontSize='large'></Assignment>
+                                <Link to='/Observacao' className={styles.subMenu}>
+                                    Observação
                                 </Link>
                             </NavDropdown.Item>
                         </NavDropdown>

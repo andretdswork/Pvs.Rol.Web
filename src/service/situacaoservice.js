@@ -7,16 +7,12 @@ class SituacaoService extends ServiceBase {
     }
 
     async Create(params) {        
-        const response = await super.Post(`Create?idEmpresa=${params.idempresa}&status=${params.status}&datasituacao=${params.dataSituacao}`).then((response) => {
-            return response
-        })        
+        const response = await super.Post(`Create?idEmpresa=${params.idempresa}&status=${params.status}&datasituacao=${params.dataSituacao}`)
         return response
     }
 
     async getListStatus() {
-        const response = await super.Get(`AllDescriptionsituation`).then((response) => {
-            return response
-        })        
+        const response = await super.Get(`AllDescriptionsituation`)
         return response
     } 
 }

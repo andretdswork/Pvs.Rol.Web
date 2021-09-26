@@ -11,14 +11,16 @@ const PvsInput = (props) => {
     return (
         <>
             <FloatingLabel controlId="floatingInputGrid" label={props.label}>
-                <Form.Control type={props.type}
+                <Form.Control 
+                    type={!props.isTextArea && props.type}
                     placeholder={props.placeHolder}
                     onChange={onChangeHandler} 
                     value={props.value} 
                     maxLength={props.maxLength} 
                     required={props.reguired}   
                     min={props.min} 
-                    max={props.max}                    
+                    max={props.max}     
+                    as={props.isTextArea && 'textarea'}
                     />
             </FloatingLabel>
             {

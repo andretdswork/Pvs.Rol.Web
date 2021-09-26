@@ -15,7 +15,7 @@ const Situacao = () => {
     const [lisStatus, setListStatus] = useState([])
 
     useEffect( () => {
-        let service = new SituacaoService()        
+        let service = new SituacaoService()
         const fetch =  async function FetchData() {
             const response = await service.getListStatus().then( (data) => {return data})
             setListStatus(response)            
@@ -32,9 +32,7 @@ const Situacao = () => {
                 dataSituacao: dataSituacao,
                 status: status
             }
-            const response = await service.Create(filter).then((data) => {
-                return data
-            })
+            const response = await service.Create(filter)
             if (response) {
                 toast.success('Situacao salvo com sucesso!!')
                 setSelectedCompany('')                

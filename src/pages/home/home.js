@@ -6,8 +6,9 @@ import {
 
 import Situacao from '../situacao/situacao.jsx'
 import Prolabore from '../prolabore/prolabore.jsx';
-import Tributacao from '../tributacao/tributacao';
+import Tributacao from '../tributacao/tributacao.jsx';
 import Empresa from '../empresa/empresa';
+import Observacao from '../observacao/observacao';
 
 const Home = (props) => {
     return (
@@ -25,6 +26,9 @@ const Home = (props) => {
                 </Route>
                 <Route path="/Empresa">
                     <Empresa />
+                </Route>
+                <Route path="/Observacao">
+                    <Observacao />
                 </Route>
             </Switch>
 

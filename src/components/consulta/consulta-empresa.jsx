@@ -8,7 +8,7 @@ import { toast } from 'react-toastify'
 import ConsultaEmpresaDetalhe from './consulta-empresa-detalhe'
 
 const ConsultaEmpresa = (props) => {
-    const [show, setShow] = useState(props.show)
+    const [show] = useState(props.show)
     const [filter, setFilter] = useState()
     const [listaEmpresa, setListaEmpresa] = useState()
     const [empresaSelecionada, setEmpresaSelecionada] = useState('')
@@ -48,7 +48,7 @@ const ConsultaEmpresa = (props) => {
                     <Modal show={show} onHide={handleClose} size="lg" backdrop='static' dialogClassName={styles.modalSize}>
                         <ModalHeader closeButton>
                             <h4>
-                                Empresa selecionada
+                                Selecionar Empresa
                                 <div>
                                     <span className={styles.empresaSelecionada}>{empresaSelecionada.razaoSocial}</span>                                    
                                 </div>
