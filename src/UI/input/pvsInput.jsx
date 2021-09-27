@@ -23,6 +23,7 @@ const PvsInput = (props) => {
                             min={props.min}
                             max={props.max}
                             as='textarea'
+                            size={props.size ? props.size : 'lg'}
                         />
                         :
                         <Form.Control
@@ -31,9 +32,10 @@ const PvsInput = (props) => {
                             onChange={onChangeHandler}
                             value={props.value}
                             maxLength={props.maxLength}
-                            required={props.reguired}
+                            required={props.required}
                             min={props.min}
                             max={props.max}
+                            size={props.size ? props.size : 'lg'}
                         />
                 }
 

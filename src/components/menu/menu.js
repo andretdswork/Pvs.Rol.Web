@@ -5,6 +5,7 @@ import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import DonutSmallIcon from '@material-ui/icons/DonutSmall';
 import PriorityHighIcon from '@material-ui/icons/PriorityHigh';
 import Assignment from '@material-ui/icons/Assignment';
+import PeopleIcon from '@material-ui/icons/People';
 import styles from './menu.module.css'
 import {
     Link
@@ -57,6 +58,14 @@ const Menu = () => {
                                 <Assignment fontSize='large'></Assignment>
                                 <Link to='/Observacao' className={styles.subMenu}>
                                     Observação
+                                </Link>
+                            </NavDropdown.Item>
+                        </NavDropdown>
+                        <NavDropdown title="Financeiro" id="basic-nav-dropdown" className={styles.dropdownMenu}>
+                            <NavDropdown.Item>
+                                <PeopleIcon fontSize='large'></PeopleIcon>
+                                <Link to='/Pessoa' className={styles.subMenu}>
+                                    Pessoas
                                 </Link>
                             </NavDropdown.Item>
                         </NavDropdown>

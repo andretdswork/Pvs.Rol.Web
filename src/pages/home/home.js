@@ -9,6 +9,7 @@ import Prolabore from '../prolabore/prolabore.jsx';
 import Tributacao from '../tributacao/tributacao.jsx';
 import Empresa from '../empresa/empresa';
 import Observacao from '../observacao/observacao';
+import Pessoa from '../pessoa/pessoa';
 
 const Home = (props) => {
     return (
@@ -29,6 +30,9 @@ const Home = (props) => {
                 </Route>
                 <Route path="/Observacao">
                     <Observacao />
+                </Route>
+                <Route path="/Pessoa">
+                    <Pessoa />
                 </Route>
             </Switch>
 

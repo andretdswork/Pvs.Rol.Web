@@ -97,7 +97,7 @@ const Tributacao = () => {
                         <PvsInput type='date' placeholder='Data Tributação' onChange={setDataTributacaoHanlder} value={dataTributacao}> </PvsInput>
                     </Col>
                     <Col>
-                        <PvsSelect options={lisStatus} defaultValue={status} onChangeHandler={setStatusHandler} ref={selectInputRef}></PvsSelect>
+                        <PvsSelect options={lisStatus} defaultValue={status} onChangeHandler={setStatusHandler} ref={selectInputRef} Label='Escolha a Situação'></PvsSelect>
                     </Col>
                     <Col>
                         <Button variant="primary" type="submit" style={{ 'float': 'left' }}>
