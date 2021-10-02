@@ -1,9 +1,10 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Form, Row, Col, Button } from 'react-bootstrap'
 import PvsCard from "../../UI/card/pvs-card"
 import PvsInput from "../../UI/input/pvsInput"
 import PvsSelect from '../../UI/select/pvs-select'
-import styles from './pessoa.module.css'
+import ServiceUtils from '../../service/serviceutils'
+
 
 const listSexo = [{
     key: 'M',
@@ -40,6 +41,8 @@ const listEstadaCivil = [{
 
 const Pessoa = (props) => {
     const selectInputRef = useRef()
+    const selectedEstadoRef = useRef()
+    const selectedEstadoEnderecoRef = useRef()
     const [cpf, setCpf] = useState('')
     const [nomeCompleto, setNomeCompleto] = useState('')
     const [primeiroNome, setPrimeiroNome] = useState('')
@@ -60,9 +63,30 @@ const Pessoa = (props) => {
     const [tel2, setTel2] = useState('')
     const [pis, setPis] = useState('')
     const [tituloEleitor, setTituloEleitor] = useState('')
+    const [cep, setCep] = useState('')
+    const [rua, setRua] = useState('')
+    const [numero, setNumero] = useState('')
+    const [complemento, setComplemento] = useState('')
+    const [bairro, setBairro] = useState('')
+    const [cidade, setCidade] = useState('')
+    const [uf,setUf] = useState('SP')
+    const [ufs, setUfs] = useState([])
+    const [ufEndereco, setUfEndereco] = useState('SP')
+    const [ufsEndereco,setUfsEndereco] = useState([])
 
     const Create = (event) => {
+        event.preventDefault();
         console.log('create pessoa')
+    }    
+
+    useEffect(() => {
+        const estados = new ServiceUtils().getEstados()
+        setUfs(estados)
+        setUfsEndereco(estados)
+    },[])
+
+    const setUfHandler = (value) => {
+        setUf(value)
     }
 
     const setCpfHandler = (value) => {
@@ -145,12 +169,47 @@ const Pessoa = (props) => {
         setTituloEleitor(value)
     }
 
+    const setCepHandler = (value) => {
+        setCep(value)
+    }
+
+    const setRuaHandler = (value) => {
+        setRua(value)
+    }
+
+    const setNumeroHandler = (value) => {
+        setNumero(value)
+    }
+    const setComplementoHandler = (value) => {
+        setComplemento(value)
+    }
+    const setBairroHandler = (value) => {
+        setBairro(value)
+    }
+    const setCidadeHandler = (value) => {
+        setCidade(value)
+    }
+
+    const setUfEnderecoHandler = (value) => {
+        setUfEndereco(value)
+    }
+
+    const searchAddressHandler = async (value) => {
+        let endereco = await new ServiceUtils().buscarEnderecoPorCep(value)
+        if (endereco)
+        {
+            setRua(endereco.data.logradouro)
+            setBairro(endereco.data.bairro)
+            setCidade(endereco.data.localidade)
+            setUfEnderecoHandler(endereco.uf)
+        }
+    }
 
     return (
         <>
-            <PvsCard title='Cadastro de Pessoas'>
+            <PvsCard title='Pessoas'>
                 <Form onSubmit={Create}>
-                    <Row className="g-2" md={5} xs={12}>
+                    <Row className="g-2" md={4} xs={1}>
                         <Col>
                             <PvsInput type="text" placeHolder="Cpf" onChange={setCpfHandler} value={cpf} required={true} label="Cpf" maxLength={11} size='sm' />
                         </Col>
@@ -163,14 +222,14 @@ const Pessoa = (props) => {
                         <Col>
                             <PvsSelect options={listSexo} defaultValue={sexo} onChangeHandler={setSexoHandler} ref={selectInputRef} Label='Sexo'></PvsSelect>
                         </Col>
+                    </Row>
+                    <br />
+                    <Row className="g-2" md={5} xs={1} >
                         <Col>
                             <PvsInput type="text" placeHolder="RG" onChange={setRgHandler} value={rg} required={true} label="RG" maxLength={9} size='sm' />
                         </Col>
-                    </Row>
-                    <br />
-                    <Row className="g-2" md={5} xs={12} >
                         <Col>
-                            <PvsInput type="date" placeHolder="Data Expedição" onChange={setDataExpedicaoHandler} value={dataExpedicao} size='sm' />
+                            <PvsInput type="date" placeHolder="Data Expedição" onChange={setDataExpedicaoHandler} value={dataExpedicao} label='Data Expedição' size='sm' />
                         </Col>
                         <Col>
                             <PvsInput type="text" placeHolder="Orgão Expeditor" onChange={setOrgaoExpeditorHandler} value={orgaoExpeditor} required={true} label="Orgão Expeditor" maxLength={10} size='sm' />
@@ -181,12 +240,15 @@ const Pessoa = (props) => {
                         <Col>
                             <PvsSelect options={listNacionalidade} defaultValue={nacionalidade} onChangeHandler={setNacionalidadeHandler} ref={selectInputRef} Label='Nacionalidade'></PvsSelect>
                         </Col>
-                        <Col>
-                            <PvsInput type="text" placeHolder="Município" onChange={setMunicipioHandler} value={municipio} required={true} label="Município" size='sm' />
-                        </Col>
                     </Row>
                     <br />
                     <Row className="g-2" md={5} xs={12}>
+                        <Col>
+                            <PvsInput type="text" placeHolder="Município" onChange={setMunicipioHandler} value={municipio} required={true} label="Município" size='sm' />
+                        </Col>
+                        <Col>
+                            <PvsSelect options={ufs} defaultValue={uf} onChangeHandler={setUfHandler} ref={selectedEstadoRef} label="Estado"></PvsSelect>
+                        </Col>
                         <Col>
                             <PvsInput type="text" placeHolder="Profissao" onChange={setProfissaoHandler} value={profissao} required={true} label="Profissão" size='sm' />
                         </Col>
@@ -225,13 +287,45 @@ const Pessoa = (props) => {
                         </Col>
                     </Row>
                     <br />
-                    <Row className="g-2" md={2} xs={12}>
+                    <hr></hr>
+                    <Row style={{ 'textAlign': 'left' }}>
+                        <h5>Endereço</h5>
+                    </Row>
+                    <Row xs={1} md={3} className="g-2">
+                        <Col md={2} >
+                            <PvsInput type="text" placeHolder="CEP" onChange={setCepHandler} value={cep} required={true} label="CEP" maxLength={8} onBlur={searchAddressHandler}/>
+                        </Col>
+                        <Col >
+                            <PvsInput type="text" placeHolder="Rua" onChange={setRuaHandler} value={rua} required={true} label="Rua" maxLength={100} />
+                        </Col >
+                        <Col md={2} >
+                            <PvsInput type="number" placeHolder="Número" onChange={setNumeroHandler} value={numero} required={true} label="Número" maxLength={5} />
+                        </Col >
+                        <Col >
+                            <PvsInput type="text" placeHolder="Complemento" onChange={setComplementoHandler} value={complemento} required={true} label="Complemento" />
+                        </Col>
+                    </Row>
+                    <br />
+                    <Row>
+                        <Col>
+                            <PvsInput type="text" placeHolder="Bairro" onChange={setBairroHandler} value={bairro} required={true} label="Bairro" />
+                        </Col>
+                        <Col>
+                            <PvsInput type="text" placeHolder="Cidade" onChange={setCidadeHandler} value={cidade} required={true} label="Cidade" />
+                        </Col>
+                        <Col>
+                            <PvsSelect options={ufsEndereco} defaultValue={ufEndereco} onChangeHandler={setUfEnderecoHandler} ref={selectedEstadoEnderecoRef} label="Estado"></PvsSelect>
+                        </Col>
+                    </Row>
+                    <br />
+                    <Row className="g-2" md={1} xs={12}>
                         <Col>
                             <Button variant="primary" type="submit" style={{ 'float': 'left' }}>
                                 Salvar
                             </Button>
                         </Col>
                     </Row>
+
                 </Form>
             </PvsCard>
         </>
