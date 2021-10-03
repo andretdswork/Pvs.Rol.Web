@@ -17,28 +17,11 @@ const listSexo = [{
 }]
 
 const listNacionalidade = [{
-    key: 'B',
+    key: '1',
     label: 'Brasileiro'
 }, {
-    key: 'E',
+    key: '2',
     label: 'Estrangeiro'
-}]
-
-const listEstadaCivil = [{
-    key: 1,
-    label: 'Solteiro'
-}, {
-    key: 2,
-    label: 'Casado'
-}, {
-    key: 3,
-    label: 'Divorciado'
-}, {
-    key: 4,
-    label: 'Viúvo'
-}, {
-    key: 5,
-    label: 'Desquitado'
 }]
 
 const Pessoa = (props) => {
@@ -48,15 +31,15 @@ const Pessoa = (props) => {
     const [cpf, setCpf] = useState('')
     const [nomeCompleto, setNomeCompleto] = useState('')
     const [primeiroNome, setPrimeiroNome] = useState('')
-    const [sexo, setSexo] = useState('')
+    const [sexo, setSexo] = useState('1')
     const [rg, setRg] = useState('')
     const [dataExpedicao, setDataExpedicao] = useState('')
     const [orgaoExpeditor, setOrgaoExpeditor] = useState('')
     const [dataNascimento, setDataNascimento] = useState('')
-    const [nacionalidade, setNacionalidade] = useState('')
+    const [nacionalidade, setNacionalidade] = useState('1')
     const [municipio, setMunicipio] = useState('')
     const [profissao, setProfissao] = useState('')
-    const [estadoCivil, setEstadoCivil] = useState('')
+    const [estadoCivil, setEstadoCivil] = useState('1')
     const [email1, setEmail1] = useState('')
     const [email2, setEmail2] = useState('')
     const [ddd1, setDdd1] = useState('')
@@ -75,6 +58,7 @@ const Pessoa = (props) => {
     const [ufs, setUfs] = useState([])
     const [ufEndereco, setUfEndereco] = useState('SP')
     const [ufsEndereco,setUfsEndereco] = useState([])
+    const [listEstadoCivil, setListEstadoCivil] = useState([])
 
     const Create = async (event) => {
         event.preventDefault()
@@ -109,22 +93,50 @@ const Pessoa = (props) => {
             CidadeEndereco : cidade,            
             UfEndereco : ufEndereco
         }
-        const service = new PessoaService().Create()
+        const service = new PessoaService()
         const response = await service.Create(params)
         toast.success(response.message)
-        //ClearForm()
+        ClearForm()
     } 
 
     const ClearForm = () => {
         setCpf('')
+        setNomeCompleto('')
+        setPrimeiroNome('')
+        setSexo('')
+        useState('')
+        setDataExpedicao('')
+        setOrgaoExpeditor('')
+        setDataNascimento('')
+        setNacionalidade('')
+        setMunicipio('')
+        setProfissao('')
+        setEstadoCivil('')
+        setEmail1('')
+        setEmail2('')
+        setDdd1('')
+        setTel1('')
+        setDdd2('')
+        setTel2('')
+        setPis('')
+        setTituloEleitor('')
         setCep('')
-        setUf('')
+        setRua('')
+        setNumero('')
+        setComplemento('')
+        setBairro('')
+        setCidade('')
+        setUf('SP')    
+        setUfEndereco('SP')
     }
 
     useEffect(() => {
-        const estados = new ServiceUtils().getEstados()
+        const service = new ServiceUtils()
+        const estados = service.getEstados()
         setUfs(estados)
         setUfsEndereco(estados)
+        const listaEstadoCivil = service.getEstadoCivil()
+        setListEstadoCivil(listaEstadoCivil)
     },[])
 
     const setUfHandler = (value) => {
@@ -295,7 +307,7 @@ const Pessoa = (props) => {
                             <PvsInput type="text" placeHolder="Profissao" onChange={setProfissaoHandler} value={profissao} required={true} label="Profissão" size='sm' />
                         </Col>
                         <Col>
-                            <PvsSelect options={listEstadaCivil} defaultValue={estadoCivil} onChangeHandler={setEstadoCivilHandler} ref={selectInputRef} Label='Estado Civil'></PvsSelect>
+                            <PvsSelect options={listEstadoCivil} defaultValue={estadoCivil} onChangeHandler={setEstadoCivilHandler} ref={selectInputRef} Label='Estado Civil'></PvsSelect>
                         </Col>
                     </Row>
                     <br />

@@ -32,8 +32,29 @@ class ServiceUtils  {
     {"key":"GO","label":"Goiás"},
     {"key":"DF","label":"Distrito Federal"}];
 
+    #listEstadaCivil = [{
+        key: 1,
+        label: 'Solteiro'
+    }, {
+        key: 2,
+        label: 'Casado'
+    }, {
+        key: 3,
+        label: 'Divorciado'
+    }, {
+        key: 4,
+        label: 'Viúvo'
+    }, {
+        key: 5,
+        label: 'Desquitado'
+    }]
+
     getEstados() {
         return this.#estados.sort()
+    }
+
+    getEstadoCivil() {
+        return this.#listEstadaCivil
     }
 
     async buscarEnderecoPorCep(cep) {

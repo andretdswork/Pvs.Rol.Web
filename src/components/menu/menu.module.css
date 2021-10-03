@@ -1,23 +1,58 @@
-.mainNavColor {
-    background-color: #b9b9b952;
+.marginBottom {
+    margin-bottom: 1%;
 }
 
-.subMenu {
-    float:right;
-    padding-top: 2%;
-    color: black !important;
-    text-decoration: none !important;
+.menu {
+    background-color: rgb(248, 249, 250);    
+    text-align: center;
+    width: 100%;
 }
 
-.divider {
-    color: #efebeb14 !important;
+.menu ul {    
+    list-style: none;    
+    position: relative;
 }
 
-dropdownMenu {
-    color: #efebebbd !important;
-    border-radius: 0.25rem !important;
+.menu ul li {
+    width: 150px;
+    float: left;
 }
 
-.marginBottom10 {
-    margin-bottom: 2%;
+.menu a {
+    padding: 15px;
+    display: inline-block;
+    text-decoration: none;    
+    color: black;
 }
+
+.menu ul li ul li {
+    background-color: #fff;
+}
+
+.menu ul ul {
+    position: absolute;
+    visibility: hidden;
+    display: none;    
+}
+
+.menu ul li:hover ul {
+    visibility: visible;
+    display: block;
+}
+
+.menu a:hover {
+    background-color: rgb(195, 199, 199);
+    color: #fff;
+    }
+
+    .menu ul ul li {
+        float: none;
+        border-bottom: solid 1px #ccc;        
+        z-index: 1;
+        position: relative;
+    }
+
+    .menu ul ul li a {
+        background-color: #fff;
+        display: inline-block;
+    }
