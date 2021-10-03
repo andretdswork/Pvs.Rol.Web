@@ -1,9 +1,11 @@
 import { useState, useRef, useEffect } from 'react'
 import { Form, Row, Col, Button } from 'react-bootstrap'
+import { toast } from 'react-toastify'
 import PvsCard from "../../UI/card/pvs-card"
 import PvsInput from "../../UI/input/pvsInput"
 import PvsSelect from '../../UI/select/pvs-select'
 import ServiceUtils from '../../service/serviceutils'
+import PessoaService from '../../service/pessoaservice'
 
 
 const listSexo = [{
@@ -74,10 +76,50 @@ const Pessoa = (props) => {
     const [ufEndereco, setUfEndereco] = useState('SP')
     const [ufsEndereco,setUfsEndereco] = useState([])
 
-    const Create = (event) => {
-        event.preventDefault();
-        console.log('create pessoa')
-    }    
+    const Create = async (event) => {
+        event.preventDefault()
+        
+        let params = {
+            Cpf : cpf,
+            NomeCompleto : nomeCompleto,
+            PrimeiroNome : primeiroNome,
+            Genero : sexo,
+            Rg : rg,
+            DataExpedicaoRg : dataExpedicao,
+            OrgaoExpeditor : orgaoExpeditor,
+            DataNascimento : dataNascimento,
+            Nacionalidade : nacionalidade,
+            Cidade : municipio,
+            Uf : uf,
+            Profissao : profissao,
+            EstadoCivil : estadoCivil,
+            Email1 : email1,
+            Email2 : email2,
+            DDD1 : ddd1,
+            Telefone1: tel1,
+            DDD2 : ddd2,
+            Telefone2 : tel2,
+            PIS : pis,
+            TituloEleitor : tituloEleitor,
+            Cep : cep,
+            Rua : rua,
+            Numero : numero,
+            Complemento : complemento,
+            Bairro : bairro,
+            CidadeEndereco : cidade,            
+            UfEndereco : ufEndereco
+        }
+        const service = new PessoaService().Create()
+        const response = await service.Create(params)
+        toast.success(response.message)
+        //ClearForm()
+    } 
+
+    const ClearForm = () => {
+        setCpf('')
+        setCep('')
+        setUf('')
+    }
 
     useEffect(() => {
         const estados = new ServiceUtils().getEstados()
@@ -308,7 +350,7 @@ const Pessoa = (props) => {
                     <br />
                     <Row>
                         <Col>
-                            <PvsInput type="text" placeHolder="Bairro" onChange={setBairroHandler} value={bairro} required={true} label="Bairro" />
+                            <PvsInput type="text" placeHolder="Bairro" onChange={setBairroHandler} value={bairro} required={true} label="Bairro" size='sm'/>
                         </Col>
                         <Col>
                             <PvsInput type="text" placeHolder="Cidade" onChange={setCidadeHandler} value={cidade} required={true} label="Cidade" />

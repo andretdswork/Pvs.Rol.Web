@@ -1,6 +1,5 @@
 class Validator {
 
-
     CpfIsValid = (strCPF) => {        
         var Soma;
         var Resto;
@@ -21,7 +20,6 @@ class Validator {
         if (Resto !== parseInt(strCPF.substring(10, 11))) return false;
         return true;
     }
-
 }
 
 export default Validator
