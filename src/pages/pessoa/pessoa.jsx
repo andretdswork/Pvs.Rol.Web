@@ -6,6 +6,7 @@ import PvsInput from "../../UI/input/pvsInput"
 import PvsSelect from '../../UI/select/pvs-select'
 import ServiceUtils from '../../service/serviceutils'
 import PessoaService from '../../service/pessoaservice'
+import styles from './pessoa.module.css'
 
 
 const listSexo = [{
@@ -263,7 +264,7 @@ const Pessoa = (props) => {
         <>
             <PvsCard title='Pessoas'>
                 <Form onSubmit={Create}>
-                    <Row className="g-2" md={4} xs={1}>
+                    <Row className='g-2' lg={4} md={2} xs={1}>
                         <Col>
                             <PvsInput type="text" placeHolder="Cpf" onChange={setCpfHandler} value={cpf} required={true} label="Cpf" maxLength={11} size='sm' />
                         </Col>
@@ -277,8 +278,7 @@ const Pessoa = (props) => {
                             <PvsSelect options={listSexo} defaultValue={sexo} onChangeHandler={setSexoHandler} ref={selectInputRef} Label='Sexo'></PvsSelect>
                         </Col>
                     </Row>
-                    <br />
-                    <Row className="g-2" md={5} xs={1} >
+                    <Row className="g-2" lg={5} md={4} xs={1} >
                         <Col>
                             <PvsInput type="text" placeHolder="RG" onChange={setRgHandler} value={rg} required={true} label="RG" maxLength={9} size='sm' />
                         </Col>
@@ -295,7 +295,6 @@ const Pessoa = (props) => {
                             <PvsSelect options={listNacionalidade} defaultValue={nacionalidade} onChangeHandler={setNacionalidadeHandler} ref={selectInputRef} Label='Nacionalidade'></PvsSelect>
                         </Col>
                     </Row>
-                    <br />
                     <Row className="g-2" md={5} xs={12}>
                         <Col>
                             <PvsInput type="text" placeHolder="Município" onChange={setMunicipioHandler} value={municipio} required={true} label="Município" size='sm' />
@@ -310,7 +309,6 @@ const Pessoa = (props) => {
                             <PvsSelect options={listEstadoCivil} defaultValue={estadoCivil} onChangeHandler={setEstadoCivilHandler} ref={selectInputRef} Label='Estado Civil'></PvsSelect>
                         </Col>
                     </Row>
-                    <br />
                     <Row className="g-2" xs={12}>
                         <Col md={3}>
                             <PvsInput type="email" placeHolder="E-mail" onChange={setEmail1Handler} value={email1} required={true} label="Email" size='sm' maxLength={60} />
@@ -331,7 +329,6 @@ const Pessoa = (props) => {
                             <PvsInput type="text" placeHolder="Telefone" onChange={setTel2Handler} value={tel2} required={true} label="Telefone" size='sm' maxLength={10} />
                         </Col>
                     </Row>
-                    <br />
                     <Row className="g-2" md={4} xs={12}>
                         <Col>
                             <PvsInput type="number" placeHolder="PIS" onChange={setPisHandler} value={pis} required={true} label="PIS" size='sm' maxLength={11} />
@@ -340,8 +337,6 @@ const Pessoa = (props) => {
                             <PvsInput type="number" placeHolder="Título Eleitor" onChange={setTituloEleitorHandler} value={tituloEleitor} required={true} label="Título Eleitor" size='sm' maxLength={13} />
                         </Col>
                     </Row>
-                    <br />
-                    <hr></hr>
                     <Row style={{ 'textAlign': 'left' }}>
                         <h5>Endereço</h5>
                     </Row>
@@ -359,7 +354,6 @@ const Pessoa = (props) => {
                             <PvsInput type="text" placeHolder="Complemento" onChange={setComplementoHandler} value={complemento} required={true} label="Complemento" />
                         </Col>
                     </Row>
-                    <br />
                     <Row>
                         <Col>
                             <PvsInput type="text" placeHolder="Bairro" onChange={setBairroHandler} value={bairro} required={true} label="Bairro" size='sm'/>
@@ -371,7 +365,6 @@ const Pessoa = (props) => {
                             <PvsSelect options={ufsEndereco} defaultValue={ufEndereco} onChangeHandler={setUfEnderecoHandler} ref={selectedEstadoEnderecoRef} label="Estado"></PvsSelect>
                         </Col>
                     </Row>
-                    <br />
                     <Row className="g-2" md={1} xs={12}>
                         <Col>
                             <Button variant="primary" type="submit" style={{ 'float': 'left' }}>
@@ -379,7 +372,6 @@ const Pessoa = (props) => {
                             </Button>
                         </Col>
                     </Row>
-
                 </Form>
             </PvsCard>
         </>

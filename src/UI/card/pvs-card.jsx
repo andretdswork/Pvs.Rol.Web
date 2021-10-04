@@ -3,9 +3,9 @@ import styles from './pvs-card.module.css'
 
 const PvsCard = (props) => {
     return (
-        <Container>            
+        <Container>
             <div className={styles.pvsForm}>
-            <h2>{props.title}</h2>
+            <span className={styles.title}>{props.title}</span>
                 {props.children}
             </div>
         </Container>

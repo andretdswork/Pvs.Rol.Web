@@ -7,3 +7,10 @@
     width: auto;
     height: auto;
 }
+
+.title {
+    font-size: 28px;
+    font-weight: 700;
+    padding: 1%;
+    display: inline-block;
+}
