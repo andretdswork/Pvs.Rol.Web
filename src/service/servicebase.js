@@ -14,8 +14,16 @@ class ServiceBase {
     }
 
     async Get(action, params) {    
-        const response = await this.#instance.get(`${this.#url}/${action}`, params)
-        return response.data
+        try {
+            const response = await this.#instance.get(`${this.#url}/${action}`, params)        
+            return response.data
+        }
+        catch {
+            return {
+                message : 'Erro ao conectar com o serviço'
+            }
+        }
+        
     }
 
     async Post(action, params) {

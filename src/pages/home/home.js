@@ -7,7 +7,7 @@ import {
 import Situacao from '../situacao/situacao.jsx'
 import Prolabore from '../prolabore/prolabore.jsx';
 import Tributacao from '../tributacao/tributacao.jsx';
-import Empresa from '../empresa/empresa';
+import Empresa from '../empresa/empresa.jsx';
 import Observacao from '../observacao/observacao';
 import Pessoa from '../pessoa/pessoa';
 
