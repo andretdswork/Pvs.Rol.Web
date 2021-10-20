@@ -5,8 +5,8 @@ import styles from './pvsInput.module.css'
 const PvsInput = (props) => {
 
     const onChangeHandler = (event) => {
-        
-        props.onChange(event.target.value)
+        const { name, value} = event.target
+        props.onChange(name, value)
     }
     const onBlurHandler = (event) => {
         if (props.onBlur)
@@ -29,6 +29,7 @@ const PvsInput = (props) => {
                             max={props.max}
                             as='textarea'
                             size={props.size ? props.size : 'lg'}
+                            name={props.name}
                         />
                         :
                         <Form.Control
@@ -42,6 +43,7 @@ const PvsInput = (props) => {
                             min={props.min}
                             max={props.max}
                             size={props.size ? props.size : 'lg'}
+                            name={props?.name}
                         />
                 }
 

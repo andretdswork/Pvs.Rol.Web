@@ -3,6 +3,17 @@ import { Row, Col } from 'react-bootstrap'
 import PvsInput from '../../UI/input/pvsInput.jsx'
 
 const Endereco = (props) => {
+    let Endereco = {
+        cep : '',
+        rua : '',
+        numero : '',
+        complemento : '',
+        bairro : '',
+        cidade : ''
+    }
+
+    const [endereco, setEndereco] = useState(Endereco)
+
     const [cep, setCep] = useState('')
     const [rua, setRua] = useState('')
     const [numero, setNumero] = useState('')
@@ -11,31 +22,28 @@ const Endereco = (props) => {
     const [cidade, setCidade] = useState('')
 
     const setCepHandler = (event) => {
-        setCep(event.target.value)
+        setEndereco((prev) => { return {...prev , cep = event.target.value }} )
     }
 
     const setRuaHandler = (event) => {
-        setRua(event.target.value)
+        setEndereco((prev) => {{ return {...prev , rua : event.target.value }}} )
     }
 
     const setNumeroHandler = (event) => {
-        setNumero(event.target.value)
+        setEndereco((prev) => { return { ...prev , numero : event.target.value }})
     }
     const setComplementoHandler = (event) => {
-        setComplemento(event.target.value)
+        setEndereco((prev) => { return { ...prev , complemento : event.target.value } })
     }
     const setBairroHandler = (event) => {
-        setBairro(event.target.value)
+        setEndereco((prev) => { return { ...prev , bairro : event.target.value }})
     }
     const setCidadeHandler = (event) => {
-        setCep(event.target.value)
-    }    
+        setEndereco((prev) => {  return { ...prev , cidade : event.target.value } })
+    }
 
     return (
         <>
-            <Row style={{'textAlign':'left'}}>
-                <h4>Endereco</h4>
-            </Row>
             <Row>
                 <Col md={2}>
                     <PvsInput type="text" placeHolder="CEP" onChange={setCepHandler} value={cep} required={true} label="CEP" maxLength={8} />

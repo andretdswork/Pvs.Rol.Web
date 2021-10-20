@@ -1,7 +1,8 @@
 import { useRef, useState, useEffect, memo } from 'react'
 import { toast } from 'react-toastify'
-import { Row, Form, FloatingLabel, Col, Button } from 'react-bootstrap'
+import { Row, Form, Col, Button } from 'react-bootstrap'
 import PvsCard from '../../UI/card/pvs-card'
+import PvsInput from '../../UI/input/pvsInput.jsx'
 import SituacaoService from '../../service/situacaoservice'
 import PvsSelect from '../../UI/select/pvs-select'
 import SelecionaEmpresa from '../../components/consulta/seleciona-empresa'
@@ -17,8 +18,9 @@ const Situacao = () => {
     useEffect( () => {
         let service = new SituacaoService()
         const fetch =  async function FetchData() {
-            const response = await service.getListStatus().then( (data) => {return data})
-            setListStatus(response)            
+            let response = await service.getListStatus()
+            console.log(response)
+            setListStatus(response)
         }
         fetch()
     }, [])
@@ -48,8 +50,8 @@ const Situacao = () => {
             toast.warning('Os campos Data Situação, Status e Empresa')
     }
 
-    const setDataSituacaoHanlder = (event) => {        
-        setDataSituacao(event.target.value)
+    const setDataSituacaoHanlder = ({value}) => {        
+        setDataSituacao(value)
     }
 
     const setStatusHandler = (value) => {        
@@ -66,13 +68,16 @@ const Situacao = () => {
                 <SelecionaEmpresa onSelectedCompany={onSelectedCompanyHandler} ref={selecionaEmpresaRef}/>
                 <Form onSubmit={CriarSituacao}>                   
                     <Row className="g-2" md={2} xs={12}>
-                        <Col>
-                            <FloatingLabel controlId="floatingInputGrid" label="Data Situação">
-                                <Form.Control type="date" placeholder="" onChange={setDataSituacaoHanlder} value={dataSituacao} />
-                            </FloatingLabel>
+                        <Col>                            
+                            <PvsInput type='Date'
+                            placeholder='Data Situação'
+                            onChange={setDataSituacaoHanlder}                            
+                            value={dataSituacao}                            
+                            required={true}
+                            name='dataSituacao'></PvsInput>
                         </Col>
                         <Col>
-                            <PvsSelect options={lisStatus} defaultValue={status} onChangeHandler={setStatusHandler} ref={selectInputRef} Label='Escolha a Situação'></PvsSelect>
+                            <PvsSelect options={lisStatus} name='status' defaultValue={status} onChange={setStatusHandler} ref={selectInputRef} Label='Escolha a Situação'></PvsSelect>
                         </Col>
                         <Col>
                             <Button variant="primary" type="submit" style={{ 'float': 'left' }}>

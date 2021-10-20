@@ -58,8 +58,11 @@ class ServiceUtils  {
     }
 
     async buscarEnderecoPorCep(cep) {
-        const result = await axios.get(`${this.#urlBaseCEP}/${cep}/json`)
-        return result
+        if (cep) {
+            const result = await axios.get(`${this.#urlBaseCEP}/${cep}/json`)
+            return result
+        }
+        return null        
     }
 }
 

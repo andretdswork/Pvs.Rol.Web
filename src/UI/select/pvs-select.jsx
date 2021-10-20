@@ -6,8 +6,9 @@ const PvsSelect = React.forwardRef((props, ref) => {
     const [key, setKey] = useState(props.defaultValue)    
 
     const setStatusHandler = (event) => {
+        const { name, value} = event.target
         setKey(event.target.value)
-        props.onChangeHandler(event.target.value)
+        props.onChange(name, value)
     }
 
     const setDefaultValue = ((value) => {
@@ -23,7 +24,7 @@ const PvsSelect = React.forwardRef((props, ref) => {
     return (
         <>
             <FloatingLabel controlId="floatingSelect" label={props.Label}>
-                <Form.Select aria-label="" onChange={setStatusHandler} value={key} ref={selectRef}>
+                <Form.Select aria-label="" onChange={setStatusHandler} value={key} ref={selectRef} name={props.name} >
                     {
                         props.options.map((item) => {
                             return <option value={item.key} key={item.key}>{item.label}</option>

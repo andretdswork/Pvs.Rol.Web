@@ -6,7 +6,7 @@ class PessoaService extends ServiceBase {
     }
 
     async Create(params) {
-        const response = await super.Post(`Create`, params)
+        const response = await super.Post(`Create`, params)        
         return response
     }
 }

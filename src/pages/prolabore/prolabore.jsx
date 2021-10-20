@@ -8,33 +8,25 @@ import Validator from "../../service/validatorservice"
 import ProlaboreService from "../../service/prolaboreservice"
 
 const Prolabore = () => {
-    const selecionaEmpresaRef = useRef()
-    const [selectedCompany, setSelectedCompany] = useState('')
+    const inititalState = {
+        cpfSocio : '',
+        anoReferencia : '',
+        mesReferencia : '',
+        valorProlabore : ''
+    }
 
-    const [cpfSocio, setCpfSocio] = useState('')
-    const [anoReferencia, setAnoReferencia] = useState('')
-    const [mesReferencia, setMesReferencia] = useState('')
-    const [valorProlabore, setValorProlabore] = useState('')
+    const [prolabore, setProlabore] = useState(inititalState)
+
+    const setProlaboreHandler = (name, value) => {
+        setProlabore((prev) => { return { ...prev, [name] : value}} )
+    }
+
+    const selecionaEmpresaRef = useRef()
+    const [selectedCompany, setSelectedCompany] = useState('')    
 
     const onSelectedCompanyHandler = (empresa) => {
         setSelectedCompany(empresa)
-    }
-
-    const setCpfSocioHandler = (value) => {
-        setCpfSocio(value)
-    }
-
-    const setAnoReferenciaHandler = (value) => {
-        setAnoReferencia(value)
-    }
-
-    const setMesReferenciaHandler = (value) => {        
-        setMesReferencia(value)
-    }
-
-    const setValorProlaboreHandler = (value) => {
-        setValorProlabore(value)
-    }
+    }    
 
     const CriarProlabore = async (event) => {
         event.preventDefault();
@@ -47,10 +39,10 @@ const Prolabore = () => {
             const service = new ProlaboreService()
             let params = {
                 companyId : selectedCompany.idEmpresa,
-                cpfSocio : cpfSocio,
-                referenceYear : anoReferencia,
-                referenceMonth  : mesReferencia,
-                prolaboreValue : valorProlabore    
+                cpfSocio : prolabore.cpfSocio,
+                referenceYear : prolabore.anoReferencia,
+                referenceMonth  : prolabore.mesReferencia,
+                prolaboreValue : prolabore.valorProlabore    
             }
             const response = await service.Create(params)
             toast.success(response.message)
@@ -59,33 +51,29 @@ const Prolabore = () => {
     }
 
     const ClearForm = () => {
-        setSelectedCompany('')                
-        setAnoReferencia('')
-        setMesReferencia('')
-        setValorProlabore('')
-        setCpfSocio('')
+        setProlabore(inititalState)
         selecionaEmpresaRef.current.clear()
     }
 
     const validateForm = () => {
         let isValid = true
         const valitador = new Validator()
-        if (!valitador.CpfIsValid(cpfSocio)){
+        if (!valitador.CpfIsValid(prolabore.cpfSocio)){
             toast.warning('Cpf inválido')
             isValid = false
         }
 
-        if (anoReferencia.length !== 4 || isNaN(anoReferencia)){
+        if (prolabore.anoReferencia.length !== 4 || isNaN(prolabore.anoReferencia)){
             toast.warning('Ano de Referência inválido')            
             isValid = false
         }
 
-        if (mesReferencia.length !== 2 || isNaN(mesReferencia)) {
+        if (prolabore.mesReferencia.length !== 2 || isNaN(prolabore.mesReferencia)) {
             toast.warning('Mes Referência inválido')
             isValid = false
         }
 
-        if (valorProlabore.length === 0 || isNaN(valorProlabore)) {
+        if (prolabore.valorProlabore.length === 0 || isNaN(prolabore.valorProlabore)) {
             toast.warning('Valor Prolabore inválido')
             isValid = false
         }
@@ -103,16 +91,16 @@ const Prolabore = () => {
             <Form onSubmit={CriarProlabore} >
                 <Row className="g-2" md={4} xs={12}>
                     <Col >
-                        <PvsInput type="text" placeHolder="Cpf do Sócio" onChange={setCpfSocioHandler} value={cpfSocio} required={true} label="Cpf do Sócio" maxLength={11} />
+                        <PvsInput type="text" placeHolder="Cpf do Sócio" name='cpfSocio' onChange={setProlaboreHandler} value={prolabore.cpfSocio} required={true} label="Cpf do Sócio" maxLength={11} />
                     </Col>
                     <Col>
-                        <PvsInput type="text" placeHolder="Ano Referência" onChange={setAnoReferenciaHandler} value={anoReferencia} required={true} label="Ano Referência" maxLength={4} min={1999} max={2100}/>
+                        <PvsInput type="text" placeHolder="Ano Referência" name='anoReferencia' onChange={setProlaboreHandler} value={prolabore.anoReferencia} required={true} label="Ano Referência" maxLength={4} min={1999} max={2100}/>
                     </Col>
                     <Col>
-                        <PvsInput type="number" placeHolder="Mes Referência" onChange={setMesReferenciaHandler} value={mesReferencia} required={true} label="Mes Referência" maxLength={2} min={1} max={12}/>
+                        <PvsInput type="number" placeHolder="Mes Referência" name='mesReferencia' onChange={setProlaboreHandler} value={prolabore.mesReferencia} required={true} label="Mes Referência" maxLength={2} min={1} max={12}/>
                     </Col>
                     <Col>
-                        <PvsInput type="text" placeHolder="Valor" onChange={setValorProlaboreHandler} value={valorProlabore} required={true} label="Valor Prolabore" />
+                        <PvsInput type="text" placeHolder="Valor" name='valorProlabore' onChange={setProlaboreHandler} value={prolabore.valorProlabore} required={true} label="Valor Prolabore" />
                     </Col>
                     <Col>
                         <Button variant="primary" type="submit" style={{ 'float': 'left' }}>

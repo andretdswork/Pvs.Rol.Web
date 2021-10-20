@@ -55,7 +55,7 @@ const Observacao = (props) => {
         return isValid
     }
 
-    const setObservacaoHandler = (value) => {
+    const setObservacaoHandler = ({value}) => {
         setObservacao(value)
     }
 
@@ -65,7 +65,7 @@ const Observacao = (props) => {
             <Form onSubmit={Create}>
                 <Row className="g-2" md={1} xs={12}>
                     <Col>
-                        <PvsInput type="text" placeHolder="Observação" onChange={setObservacaoHandler} value={observacao} required={true} label="Observação" maxLength={500} isTextArea={true} />
+                        <PvsInput type="text" placeHolder="Observação" name='observacao' onChange={setObservacaoHandler} value={observacao} required={true} label="Observação" maxLength={500} isTextArea={true} />
                     </Col>
                     <Col>
                         <Button variant="primary" type="submit" style={{ 'float': 'left' }}>

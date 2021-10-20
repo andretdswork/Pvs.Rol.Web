@@ -1,10 +1,8 @@
-import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
+import { Container, Navbar } from 'react-bootstrap'
 import Business from '@material-ui/icons/Business';
-import People from '@material-ui/icons/People';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import DonutSmallIcon from '@material-ui/icons/DonutSmall';
 import PriorityHighIcon from '@material-ui/icons/PriorityHigh';
-import Assignment from '@material-ui/icons/Assignment';
 import PeopleIcon from '@material-ui/icons/People';
 import styles from './menu.module.css'
 import {
@@ -12,11 +10,7 @@ import {
 } from "react-router-dom";
 
 const Menu = () => {
-
-    const showMenuHandler = () => {
-        console.log(`mouseover`)
-    }
-
+    
     return (
         <Navbar bg="light" expand="lg" className={styles.marginBottom}>
             <Container>
@@ -54,6 +48,10 @@ const Menu = () => {
                                 <li >
                                     <PriorityHighIcon fontSize='large'></PriorityHighIcon>
                                     <Link to='/Observacao'>Observação</Link>
+                                </li>
+                                <li >
+                                    <PriorityHighIcon fontSize='large'></PriorityHighIcon>
+                                    <Link to='/Situacao'>Situação</Link>
                                 </li>
                             </ul>
                         </li>
