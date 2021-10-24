@@ -23,7 +23,7 @@ const PvsSelect = React.forwardRef((props, ref) => {
 
     return (
         <>
-            <FloatingLabel controlId="floatingSelect" label={props.Label}>
+            <FloatingLabel controlId="floatingSelect" label={props.label}>
                 <Form.Select aria-label="" onChange={setStatusHandler} value={key} ref={selectRef} name={props.name} >
                     {
                         props.options.map((item) => {

@@ -41,19 +41,14 @@
     display: block;
 }
 
-.menu a:hover {
-    background-color: rgb(195, 199, 199);
-    color: #fff;
-    }
+.menu ul ul li {
+    float: none;
+    border-bottom: solid 1px #ccc;        
+    z-index: 1;
+    position: relative;
+}
 
-    .menu ul ul li {
-        float: none;
-        border-bottom: solid 1px #ccc;        
-        z-index: 1;
-        position: relative;
-    }
-
-    .menu ul ul li a {
-        background-color: #fff;
-        display: inline-block;
-    }
+.itemMenu:hover{
+    background-color: rgb(233, 236, 236);
+    
+}

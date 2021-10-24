@@ -19,11 +19,11 @@ const Menu = () => {
                         <li>
                             <a href='#'>Consultas</a>
                             <ul>
-                                <li>
+                                <li className={styles.itemMenu}>
                                     <Business fontSize='large'></Business>
                                     <Link to='/Empresa'>Empresa</Link>
                                 </li>
-                                <li>
+                                <li className={styles.itemMenu}>
                                     <PeopleIcon fontSize='large'></PeopleIcon>
                                     <Link to='/Pessoa'>Pessoa</Link>
                                 </li>
@@ -33,23 +33,23 @@ const Menu = () => {
                         <li>
                             <a href='#'>Manutenção</a>
                             <ul>
-                                <li >
+                                <li className={styles.itemMenu}>
                                     <Business fontSize='large'></Business>
                                     <Link to='/Empresa'>  Empresa</Link>
                                 </li>
-                                <li >
+                                <li className={styles.itemMenu}>
                                     <MonetizationOnIcon fontSize='large'></MonetizationOnIcon>
                                     <Link to='/Tributacao'>Tributação</Link>
                                 </li>
-                                <li >
+                                <li className={styles.itemMenu}>
                                     <DonutSmallIcon fontSize='large'></DonutSmallIcon>
                                     <Link to='/Prolabore'>Prolabore</Link>
                                 </li>
-                                <li >
+                                <li className={styles.itemMenu}>
                                     <PriorityHighIcon fontSize='large'></PriorityHighIcon>
                                     <Link to='/Observacao'>Observação</Link>
                                 </li>
-                                <li >
+                                <li className={styles.itemMenu}>
                                     <PriorityHighIcon fontSize='large'></PriorityHighIcon>
                                     <Link to='/Situacao'>Situação</Link>
                                 </li>
@@ -58,7 +58,7 @@ const Menu = () => {
                         <li>
                             <a href='#'>Financeiro</a>
                             <ul>
-                                <li>
+                                <li className={styles.itemMenu}>
                                     <PeopleIcon fontSize='large'></PeopleIcon>
                                     <Link to='/Pessoa'>Pessoa</Link>
                                 </li>

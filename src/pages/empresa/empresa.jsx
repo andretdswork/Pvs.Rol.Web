@@ -9,10 +9,12 @@ const Empresa = () => {
     const initialState = {
         apelido: '',
         cnpj: '',
+        dataCnpj: '',
         razaoSocial: '',
         responsavel: '',
         nomeFantasia: '',
         inscricaoEstadual: '',
+        tipoEmpresa: '',
         cep: '',
         rua: '',
         numero: '',
@@ -24,8 +26,9 @@ const Empresa = () => {
         celular: '',
         emailPrincipal: '',
         emailAdicional: '',
-        senhaECAC: '',
-        dataValidacaoECAC: '',
+        senhaEcac: '',
+        dtValEcac: '',
+        codAcessoEcac: '',
         ramoAtividade: '',
         canaePrincipal: '',
         capitalSocial: ''
@@ -37,12 +40,16 @@ const Empresa = () => {
     }
 
     const selectedEstadoEnderecoRef = useRef()
+    const selectedTipoEmpresaRef = useRef()
     const [ufsEndereco, setUfsEndereco] = useState([])
+    const [tiposEmpresa, setTiposEmpresa] = useState([])
 
     useEffect(() => {
         const service = new ServiceUtils()
         const estados = service.getEstados()
+        const tiposEmpresa = service.getTiposEmpresa()
         setUfsEndereco(estados)
+        setTiposEmpresa(tiposEmpresa)
     }, [])
 
     const Create = (event) => {
@@ -67,6 +74,9 @@ const Empresa = () => {
                         <PvsInput type="text" placeHolder="CNPJ" name='cnpj' onChange={setEmpresaHandler} value={empresa.cnpj} required={true} label="CNPJ" maxLength={15} size='sm' />
                     </Col>
                     <Col>
+                        <PvsInput type="date" placeHolder="Data CNPJ" name='dataCnpj' onChange={setEmpresaHandler} value={empresa.dataCnpj} required={true} label="Data CNPJ" maxLength={15} size='sm' />
+                    </Col>
+                    <Col>
                         <PvsInput type="text" placeHolder="Razão Social" name='razaoSocial' onChange={setEmpresaHandler} value={empresa.razaoSocial} required={true} label="Razão Social" maxLength={60} size='sm' />
                     </Col>
                     <Col>
@@ -75,9 +85,23 @@ const Empresa = () => {
                     <Col lg={2}>
                         <PvsInput type="text" placeHolder="Responsável" name='responsavel' onChange={setEmpresaHandler} value={empresa.responsavel} required={true} label="Responsável" maxLength={60} size='sm' />
                     </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <PvsSelect options={tiposEmpresa} defaultValue={empresa.tipoEmpresa} onChange={setEmpresaHandler} ref={selectedTipoEmpresaRef} label="Tipo Empresa"></PvsSelect>
+                    </Col>
                     <Col lg={2}>
                         <PvsInput type="number" placeHolder="Incrição Estadual" name='inscricaoEstadual' onChange={setEmpresaHandler} value={empresa.inscricaoEstadual} required={true} label="Inscrição Estadual" maxLength={12} size='sm' />
                     </Col>
+                    <Col>
+                        <PvsInput type="text" placeHolder="Ramo Atividade" name='ramoAtividade' onChange={setEmpresaHandler} value={empresa.ramoAtividade} required={true} label="Ramo Atividade" maxLength={60} size='sm' />
+                    </Col>
+                    <Col>
+                        <PvsInput type="number" placeHolder="Capital Social" name='capitalSocial' onChange={setEmpresaHandler} value={empresa.capitalSocial} required={true} label="Capital Social" size='sm' />
+                    </Col>
+                </Row>
+                <Row style={{ 'textAlign': 'left' }}>
+                    <h5>Endereço</h5>
                 </Row>
                 <Row xs={1} md={3} className="g-2">
                     <Col md={2} >
@@ -104,8 +128,36 @@ const Empresa = () => {
                         <PvsSelect options={ufsEndereco} defaultValue={empresa.ufEndereco} onChange={setEmpresaHandler} ref={selectedEstadoEnderecoRef} label="Estado"></PvsSelect>
                     </Col>
                 </Row>
+                <Row style={{ 'textAlign': 'left' }}>
+                    <h5>Dados de Contato</h5>
+                </Row>
                 <Row>
-                    
+                    <Col>
+                        <PvsInput type="text" placeHolder="Tel. Fixo" name='telefoneFixo' onChange={setEmpresaHandler} value={empresa.telefoneFixo} required={true} label="Tel. Fixo" size='sm' maxLength={8} />
+                    </Col>
+                    <Col>
+                        <PvsInput type="text" placeHolder="Celular" name='celular' onChange={setEmpresaHandler} value={empresa.celular} required={true} label="Celular" size='sm' maxLength={11} />
+                    </Col>
+                    <Col>
+                        <PvsInput type="text" placeHolder="Email Principal" name='emailPrincipal' onChange={setEmpresaHandler} value={empresa.emailPrincipal} required={true} label="Email Principal" size='sm' maxLength={60} />
+                    </Col>
+                    <Col>
+                        <PvsInput type="text" placeHolder="Email Adicional" name='emailAdicional' onChange={setEmpresaHandler} value={empresa.emailAdicional} required={true} label="Email Adicional" size='sm' maxLength={60} />
+                    </Col>
+                </Row>
+                <Row style={{ 'textAlign': 'left' }}>
+                    <h5>ECAC</h5>
+                </Row>
+                <Row>
+                    <Col>
+                        <PvsInput type="text" placeHolder="Senha ECAC" name='senhaEcac' onChange={setEmpresaHandler} value={empresa.senhaEcac} required={true} label="Senha ECAC" size='sm' maxLength={15} />
+                    </Col>
+                    <Col>
+                        <PvsInput type="date" placeHolder="Dt. Val ECAC" name='dtValEcac' onChange={setEmpresaHandler} value={empresa.dtValEcac} required={true} label="Dt. Val. ECAC" size='sm' />
+                    </Col>
+                    <Col>
+                        <PvsInput type="text" placeHolder="Codigo Acesso ECAC" name='codAcessoEcac' onChange={setEmpresaHandler} value={empresa.codAcessoEcac} required={true} label="Codigo Acesso ECAC" size='sm' maxLength={60} />
+                    </Col>
                 </Row>
             </Form>
         </PvsCard>

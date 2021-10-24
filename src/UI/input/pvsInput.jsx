@@ -5,7 +5,7 @@ import styles from './pvsInput.module.css'
 const PvsInput = (props) => {
 
     const onChangeHandler = (event) => {
-        const { name, value} = event.target
+        const { name, value } = event.target
         props.onChange(name, value)
     }
     const onBlurHandler = (event) => {
@@ -15,13 +15,14 @@ const PvsInput = (props) => {
 
     return (
         <>
+
             <FloatingLabel controlId="floatingInputGrid" label={props.label}>
                 {
                     props.isTextArea ?
                         <Form.Control
                             type={props.type}
                             placeholder={props.placeHolder}
-                            onChange={onChangeHandler}                            
+                            onChange={onChangeHandler}
                             value={props.value}
                             maxLength={props.maxLength}
                             required={props.required}

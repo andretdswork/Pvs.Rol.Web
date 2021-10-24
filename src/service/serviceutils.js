@@ -49,12 +49,30 @@ class ServiceUtils  {
         label: 'Desquitado'
     }]
 
+    #listTipoEmpresa = [{
+        key: 1,
+        label : 'Individual'
+    },{
+        key: 2,
+        label : 'Sociedade'
+    },{
+        key: 3,
+        label : 'MEI'
+    },{
+        key: 4,
+        label : 'EIRELI'
+    }]
+
     getEstados() {
         return this.#estados.sort()
     }
 
     getEstadoCivil() {
         return this.#listEstadaCivil
+    }
+
+    getTiposEmpresa() {
+        return this.#listTipoEmpresa
     }
 
     async buscarEnderecoPorCep(cep) {
